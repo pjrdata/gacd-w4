@@ -33,10 +33,8 @@ feature.labels <- read.table(paste0(data.dir,"./features.txt"))
 feature.set <- grep("-mean\\(\\)|std\\(\\)", feature.labels[, 2])
 all.data <- all.data[, feature.set]
 
-# now clean the feature set and name the data columns
+# now name the dataset
 names(all.data) <- feature.labels[feature.set,2]
-names(all.data) <- gsub("\\(\\)", "", names(all.data))
-feature.names <- names(all.data)
 
 ########################################################################
 #3. Use descriptive activity names to name the activities in the data set
@@ -57,10 +55,21 @@ all.data <- cbind(all.subject, all.data)
 # 4. Appropriately label the data set with descriptive variable names.
 
 #subject and activity are named
-#and the other column names look clean
+#so clean up the other column names by removing the ()
+# and expanding partial words to be readable/meaningful
+names(all.data) <- gsub("\\(\\)",  "",               names(all.data))
+names(all.data) <- gsub("^t",      "time-",          names(all.data))
+names(all.data) <- gsub("^f",      "frequency-",     names(all.data))
+names(all.data) <- gsub("Acc",     "accelerometer-", names(all.data))
+names(all.data) <- gsub("Gyro",    "gyroscope-",     names(all.data))
+names(all.data) <- gsub("Mag",     "magnitude-",     names(all.data))
+names(all.data) <- gsub("Body",    "body-",          names(all.data))
+names(all.data) <- gsub("Gravity", "gravity-",       names(all.data))
+names(all.data) <- gsub("Jerk",    "jerk-",          names(all.data))
+names(all.data) <- gsub("--",      "-",              names(all.data))
 
 # so just write out the data set
-write.table(all.data, "merged_data.txt", row.names=FALSE)
+#write.table(all.data, "merged_data.txt", row.names=FALSE)
 write.table(all.data, "merged_data.csv", row.names=FALSE,sep=",")
 
 
@@ -71,14 +80,14 @@ write.table(all.data, "merged_data.csv", row.names=FALSE,sep=",")
 all.aggregate <- all.data%>%
                   group_by(subject,activity) %>%
                   summarise_each(funs(mean))
-write.table(all.aggregate, "aggregate_data.txt", row.names=FALSE)
+#write.table(all.aggregate, "aggregate_data.txt", row.names=FALSE)
 write.table(all.aggregate, "aggregate_data.csv", row.names=FALSE,sep=",")
 
 
 #and finally clean up the mess
 setwd(wd)
 rm(activity.labels)
-rm(feature.labels); rm(feature.names); rm(feature.set)
+rm(feature.labels); rm(feature.set)
 rm(all.aggregate); rm(all.activities)
 rm(all.data); rm(all.label); rm(all.subject)
 rm(test.data);  rm(test.label);  rm(test.subject)
