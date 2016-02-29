@@ -28,7 +28,12 @@ Related to that set of observations were two other files, one contained the Acti
 Additionally, the variable names were stored in a separate file so these were read and the columns named appropriately (with some cleaning up of the names so they were more readable)
 
 ###Output files
-There are two files produced by the analysis.
-1. merged_data.csv contains the merged, cleaned and tidied data, written out to a csv file for re-use and for validation that it is correct. this file is the result of parts 1-4 of the assignment.
-2. aggregate_data.csv contains the final output from the summary by activity and subject as requested in part 4 of the assignment
+There are four files produced by the analysis, two csv and two txt files.
 
+1 merged_data.txt contains the merged, cleaned and tidied data, written out to a text file. It is for validation. This file is the intermediate result of parts 1-4 of the assignment.
+
+2 merged_data.csv is a comma separated version of the text data file of the same name. This one is produced because it's easier to open in ms excel for viewing/validation.
+
+3 aggregate_data.txt contains the final output from the summary by activity and subject. It is the file requested in part 5 of the assignment
+
+4 aggregate_data.csv is a comma separated version of the text data file of the same name. This one is produced because it's easier to open in ms excel for viewing/validation.

@@ -69,7 +69,7 @@ names(all.data) <- gsub("Jerk",    "jerk-",          names(all.data))
 names(all.data) <- gsub("--",      "-",              names(all.data))
 
 # so just write out the data set
-#write.table(all.data, "merged_data.txt", row.names=FALSE)
+write.table(all.data, "merged_data.txt", row.names=FALSE)
 write.table(all.data, "merged_data.csv", row.names=FALSE,sep=",")
 
 
@@ -80,7 +80,7 @@ write.table(all.data, "merged_data.csv", row.names=FALSE,sep=",")
 all.aggregate <- all.data%>%
                   group_by(subject,activity) %>%
                   summarise_each(funs(mean))
-#write.table(all.aggregate, "aggregate_data.txt", row.names=FALSE)
+write.table(all.aggregate, "aggregate_data.txt", row.names=FALSE)
 write.table(all.aggregate, "aggregate_data.csv", row.names=FALSE,sep=",")
 
 
